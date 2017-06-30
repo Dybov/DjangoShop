@@ -1,6 +1,0 @@
-#Python bytecode
-*.pyc
-
-#Temporart files
-*~
-*.swp
