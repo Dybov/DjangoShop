@@ -15,8 +15,9 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
     
     def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:5]
+        """Return the last five published questions. Exclude questions without choices"""
+        return Question.objects.filter(publication_date__lte=timezone.now()).exclude(choice=None).order_by('-publication_date')[:5]
+
 
 class Detail(generic.DetailView):
     """Abstract class for views that binded to pk of Question"""
