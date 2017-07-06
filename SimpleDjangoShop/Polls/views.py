@@ -23,6 +23,10 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = "Polls/detail.django.html"
     
+    def get_queryset(self):
+        return Question.objects.filter(publication_date__lte=timezone.now())
+
+
 class ResultsView(generic.DetailView):
     model = Question
     template_name = "Polls/results.django.html"
@@ -41,18 +45,3 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('Polls:results', args=(question_id,)))
-
-# def index(request):
-#     latest_question_list = Question.objects.order_by('-publication_date')[:5]
-#     context = {"latest_question_list" : latest_question_list}
-#     return render(request,'Polls/index.django.html', context)
-# 
-# 
-# def detail(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     return render(request, 'Polls/detail.django.html', {"question":question})
-# 
-# 
-# def results(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     return render(request, 'Polls/results.django.html',{"question":question})

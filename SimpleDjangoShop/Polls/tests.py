@@ -49,7 +49,7 @@ def create_question(question_text, days):
 	return Question.objects.create(question_text=question_text,
 								   publication_date = time)
 
-class QuestionViewTests(TestCase):
+class QuestionIndexViewTests(TestCase):
 	def test_index_view_with_no_question(self):
 		"""
 		If no questions exist, an appropriate message should be displayed.
@@ -58,7 +58,7 @@ class QuestionViewTests(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertContains(response, "No polls are available")
 		self.assertQuerysetEqual(response.context['latest_question_list'],[])
-		
+	
 	def test_index_view_with_a_past_question(self):
 		"""
 		Questions with a pub_date in the past should be displayed on the
@@ -99,3 +99,25 @@ class QuestionViewTests(TestCase):
 		self.assertQuerysetEqual(response.context['latest_question_list'],
 			['<Question: Past question 2>', '<Question: Past question 1>']
 		)
+
+
+class QuestionDetailViewTests(TestCase):
+	def test_detail_view_with_a_future_question(self):
+		"""
+		The detail view of a question with a pub_date in the future should
+		return a 404 not found.
+		"""
+		future_question = create_question(question_text = 'Future question', days=30)
+		response = self.client.get(reverse('Polls:detail',
+										   kwargs={'pk':future_question.id}))
+		self.assertEqual(response.status_code, 404)
+	
+	def test_detail_view_with_a_past_question(self):
+		"""
+		The detail view of a question with a pub_date in the past should
+		display the question's text.
+		"""
+		past_question = create_question(question_text = 'Old question', days=-1)
+		response = self.client.get(reverse('Polls:detail',
+										   kwargs={'pk':past_question.id}))
+		self.assertContains(response, past_question.question_text)
