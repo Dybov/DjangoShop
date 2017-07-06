@@ -18,17 +18,17 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Question.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:5]
 
-
-class DetailView(generic.DetailView):
+class Detail(generic.DetailView):
+    """Abstract class for views that binded to pk of Question"""
     model = Question
-    template_name = "Polls/detail.django.html"
     
     def get_queryset(self):
-        return Question.objects.filter(publication_date__lte=timezone.now())
+        return Question.objects.filter(publication_date__lte=timezone.now())    
 
+class DetailView(Detail):
+    template_name = "Polls/detail.django.html"
 
-class ResultsView(generic.DetailView):
-    model = Question
+class ResultsView(Detail):
     template_name = "Polls/results.django.html"
 
 
