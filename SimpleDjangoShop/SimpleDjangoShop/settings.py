@@ -76,8 +76,13 @@ WSGI_APPLICATION = 'SimpleDjangoShop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql', #'django.db.backends.sqlite3',
+        'NAME': 'django_shop_database', #os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER': 'admin',
+        #Do not try this password at production :)
+        'PASSWORD': 'Rr%5Tt66',
+        'HOST': 'localhost', #'127.0.0.1',
+        'PORT': '',  #'5432',
     }
 }
 
