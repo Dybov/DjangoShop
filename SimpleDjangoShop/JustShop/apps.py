@@ -5,4 +5,5 @@ from django.apps import AppConfig
 
 
 class JustshopConfig(AppConfig):
-    name = 'JustShop'
+    name = 'Shop'
+    verbose_name = "Shop's interface"
