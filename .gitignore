@@ -4,3 +4,6 @@
 #Temporart files
 *~
 *.swp
+
+#Static file
+SimpleDjangoShop/products/*

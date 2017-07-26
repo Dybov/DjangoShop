@@ -16,6 +16,7 @@ class Category(models.Model):
 	
 	class Meta:
 		ordering = ['category_name']
+		verbose_name_plural = 'categories'
 
 class Product(models.Model):
 	"""Product itself"""
@@ -38,4 +39,5 @@ class Product(models.Model):
 	created = models.DateTimeField(auto_now_add = True)
 	updated = models.DateTimeField(auto_now = True)
 	
-	
+	def __unicode__(self):
+		return self.slug
