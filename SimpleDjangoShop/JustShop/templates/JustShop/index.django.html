@@ -1,0 +1,9 @@
+<h1>Here is some products</h1>
+<b>{{context}}</b>
+{% if object_list %}
+	<ul>
+		{% for product in object_list %}
+			<li>{{ product }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}

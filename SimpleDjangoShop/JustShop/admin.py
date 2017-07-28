@@ -12,6 +12,5 @@ class ProductAdmin(admin.ModelAdmin):
 	list_filter = ['available', 'category',]
 	list_editable = ['stock', 'available']
 	prepopulated_fields = {'slug': ('name',)}
-	pass
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
