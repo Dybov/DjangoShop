@@ -2,7 +2,9 @@
 {% if products %}
 	<ul>
 		{% for product in products %}
-			<li>{{ product }}</li>
+			{% if product.available %}
+			<li><a href="{{ product.get_absolute_url }}">{{ product }}</a></li>
+			{% endif %}
 		{% endfor %}
 	</ul>
 {% endif %}

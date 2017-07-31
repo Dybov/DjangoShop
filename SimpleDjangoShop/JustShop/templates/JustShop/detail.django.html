@@ -1,4 +1,3 @@
 <h1>Here is some detail:</h1>
-{% if product %}
-	{{ product }}
-{% endif %}
+<h2>{{ product }}</h2>
+<h3>See also goods in <a href='{{ product.category.get_absolute_url }}'>{{ product.category }}</a>  category or all <a href='{% url "JustShop:ProductList" %} '>goods</a></h3>
