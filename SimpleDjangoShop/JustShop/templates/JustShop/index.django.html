@@ -1,8 +1,7 @@
 <h1>Here is some products</h1>
-<b>{{context}}</b>
-{% if object_list %}
+{% if products %}
 	<ul>
-		{% for product in object_list %}
+		{% for product in products %}
 			<li>{{ product }}</li>
 		{% endfor %}
 	</ul>
