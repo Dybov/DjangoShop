@@ -4,7 +4,10 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext as _
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.shortcuts import reverse
+from .apps import JustshopConfig
 
+app_name = JustshopConfig.name
 
 class Category(models.Model):
 	"""Category class for marking products"""
@@ -13,7 +16,10 @@ class Category(models.Model):
 	
 	def __unicode__(self):
 		return self.category_name
-	
+	def get_absolute_url(self):
+		return reverse('%s:ProductListByCategory' % app_name,
+					   kwargs = {'category':self.category_slug}
+					   )
 	class Meta:
 		ordering = ['category_name']
 		verbose_name_plural = 'categories'
@@ -41,3 +47,7 @@ class Product(models.Model):
 	
 	def __unicode__(self):
 		return self.slug
+	def get_absolute_url(self):
+		return reverse('%s:ProductDetail' % app_name,
+					   kwargs = {'slug':self.slug, 'pk':self.pk}
+					   )
