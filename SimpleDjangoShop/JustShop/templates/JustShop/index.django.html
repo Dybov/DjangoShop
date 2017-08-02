@@ -1,10 +1,19 @@
-<h1>Here is some products</h1>
-{% if products %}
-	<ul>
-		{% for product in products %}
-			{% if product.available %}
-			<li><a href="{{ product.get_absolute_url }}">{{ product }}</a></li>
-			{% endif %}
-		{% endfor %}
-	</ul>
-{% endif %}
+{% extends "JustShop/base.django.html" %}
+
+{% block content %}
+	{% if products %}
+		<h2>Here is some products:</h2>
+		<ul>
+			{% for product in products %}
+				{% if product.available %}
+				<li><a href="{{ product.get_absolute_url }}">{{ product }}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h1>There is no products yet</h1>
+	{% endif %}
+	{% if category %}
+ 		<h4>Products listed by category <ins>{{ category }}</ins>. See also <a href='{% url 'JustShop:ProductList' %}'>full list of products</a></h4>
+	{% endif %}	
+{% endblock %}

@@ -1,3 +1,33 @@
-<h1>Here is some detail:</h1>
-<h2>{{ product }}</h2>
-<h3>See also goods in <a href='{{ product.category.get_absolute_url }}'>{{ product.category }}</a>  category or all <a href='{% url "JustShop:ProductList" %} '>goods</a></h3>
+{% extends "JustShop/base.django.html" %}
+
+{% block content %}
+	<h1>Here is some detail:</h1>
+	<div class='col-sm-8'>
+		<table class='table table-bordered table-condensed'>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>At stock</thead>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>{{ product.name }}</td>
+				<td>{{ product.price }}</td>
+				<td>{{ product.stock }}</td>
+				<td>{{ product.description }}</td>
+			</tr>
+		</table>
+		</div>
+	<div class='col-sm-4'>
+		<button class='btn btn-danger btn-lg' disabled="disabled">Order now</button>
+	</div>
+	<div class='col-sm-12'>
+		<div>
+			<h3>See also:</h3>
+			<ul>
+				<li><a href='{{ product.category.get_absolute_url }}'>Product list by category {{ product.category }}</a></li>
+				<li><a href='{% url "JustShop:ProductList" %} '>Full product list</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}
