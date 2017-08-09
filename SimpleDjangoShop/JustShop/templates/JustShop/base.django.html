@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +9,15 @@
 	{% block header %}
 		<header class='col-sm-12'>
 			<h1>Django shop</h1>
-			{% block navigation_bar %}{% endblock %}
+			{% include "JustShop/navigation.django.html" %
 		</header>
 	{% endblock %}
 	
 	{% block container %}
-		<div class='col-sm-12'>{% block content %}{% endblock %}</div>
+		<div class='container'>{% block content %}{% endblock %}</div>
 	{% endblock %}
 	
 	{% block footer %}
-		
 		<footer class='col-sm-12'>
 			<hr>
 			<h6>Made by <a href='mailto:dybov.andrew@gmail.com'>Andrew Dybov</a></h6>
