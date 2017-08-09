@@ -13,13 +13,14 @@ class ProductList(ListView):
 		objects = self.model.objects.all()
 		self.category_slug = self.kwargs.get('category')
 		if self.category_slug:
-			cat =  get_object_or_404(Category, category_slug = self.category_slug)
-			return objects.filter(category=cat)
+			category =  get_object_or_404(Category, category_slug = self.category_slug)
+			return objects.filter(category=category)
 		return objects
 	def get_context_data(self, **kwargs):
 		context = super(ProductList, self).get_context_data(**kwargs)
 		if self.category_slug:
 			context['category'] = self.category_slug
+		context['categories'] = Category.objects.all()
 		return context
 
 class ProductDetail(DetailView):
