@@ -9,17 +9,15 @@ class ProductList(ListView):
 	model = Product
 	template_name = 'JustShop/index.django.html'
 	context_object_name = 'products'
-	def get_queryset(self):
-		objects = self.model.objects.all()
-		self.category_slug = self.kwargs.get('category')
-		if self.category_slug:
-			category =  get_object_or_404(Category, category_slug = self.category_slug)
-			return objects.filter(category=category)
-		return objects
+	
 	def get_context_data(self, **kwargs):
 		context = super(ProductList, self).get_context_data(**kwargs)
-		if self.category_slug:
-			context['category'] = self.category_slug
+		category_slug = self.kwargs.get('category')
+		if category_slug:
+			category = get_object_or_404(Category, category_slug = category_slug)
+			context[self.context_object_name] = \
+				context[self.context_object_name].filter(category=category)
+			context['category'] = category
 		context['categories'] = Category.objects.all()
 		return context
 

@@ -16,6 +16,8 @@ class Category(models.Model):
 	
 	def __unicode__(self):
 		return self.category_name
+	def __str__(self):
+		return self.__unicode__()
 	def get_absolute_url(self):
 		return reverse('%s:ProductListByCategory' % app_name,
 					   kwargs = {'category':self.category_slug}
@@ -47,6 +49,8 @@ class Product(models.Model):
 	
 	def __unicode__(self):
 		return self.slug
+	def __str__(self):
+		return self.__unicode__()
 	def get_absolute_url(self):
 		return reverse('%s:ProductDetail' % app_name,
 					   kwargs = {'pk':self.pk}
