@@ -1,9 +1,9 @@
 #Python bytecode
 *.pyc
 
-#Temporart files
+#Temporary files
 *~
 *.swp
 
-#Static file
-SimpleDjangoShop/products/*
+#Media files
+SimpleDjangoShop/media/*
