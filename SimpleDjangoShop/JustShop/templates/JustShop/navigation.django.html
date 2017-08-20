@@ -3,13 +3,13 @@
 {% url 'JustShop:ProductList' as product_list %}
 <nav class='col-sm-12' role="navigation">
 	<ul class="nav nav-tabs nav-justified">
-		<li class='{% is_active_nav request product_list%}'>
+		<li class='{% is_active_app "JustShop" %}'>
 			<a href='{{ product_list }}'>Products</a>
 		</li>
-		<li class='{% is_active_nav request product_list|add:"#"  %}'>
+		<li class='{% is_active_app ""  %}'>
 			<a  href='{{ "#" }}'>Something else</a>
 		</li>
-		<li class='{% is_active_nav request product_list|add:"##"  %}'>
+		<li class='{% is_active_app "" %}'>
 			<a  href='{{ "##" }}'>Another one</a>
 		</li>
 	</ul>
