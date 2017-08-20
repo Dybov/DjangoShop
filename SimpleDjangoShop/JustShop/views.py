@@ -3,11 +3,12 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, reverse, get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.urls import resolve
 from .models import Product, Category
 
 class ProductList(ListView):
 	model = Product
-	template_name = 'JustShop/index.django.html'
+	template_name = 'JustShop/products_list.django.html'
 	context_object_name = 'products'
 	
 	def get_context_data(self, **kwargs):
@@ -17,7 +18,7 @@ class ProductList(ListView):
 			category = get_object_or_404(Category, category_slug = category_slug)
 			context[self.context_object_name] = \
 				context[self.context_object_name].filter(category=category)
-			context['category'] = category
+			context['current_category'] = category
 		context['categories'] = Category.objects.all()
 		return context
 

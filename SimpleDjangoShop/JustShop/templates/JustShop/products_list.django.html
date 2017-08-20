@@ -1,0 +1,32 @@
+{% extends "JustShop/base.django.html" %}
+{% load JustShop_extras %}
+{% block content %}
+	<nav class='col-sm-2 categories' role="navigation-in-category">
+		<ul class='nav nav-stacked nav-pills sm'>
+			<li class='{%if not current_category %} active{% endif %}'>
+				<a href='{% url "JustShop:ProductList" %}'>All</a>
+			</li>
+		{% for category in categories %}
+			<li class='{%if category == current_category %} active{% endif %}'>
+				<a href='{{ category.get_absolute_url }}'>{{category}}</a>
+			</li>
+		{% endfor %}
+		</ul>
+	</nav>
+	<div class='col-sm-8 main'>
+		{% for product in products %}
+			<div class='col-sm-3'>
+				<a href="{{ product.get_absolute_url }}">
+					<img src='{% if product.image %}{{ product.image.url }}{% else %}/media/products/no-image-box.png{% endif %}'
+						 alt='{{ product.name }} image' class='img-responsive'>
+					{{ product.name }}</a>
+				<p>{{ product.price }} &#8381;</p>
+			</div>
+		{% empty %}
+			There is no products
+		{% endfor %}
+	</div>
+	<div class='col-sm-2 shopping-basket'>
+		Your basket is empty
+	</div>
+{% endblock %}
