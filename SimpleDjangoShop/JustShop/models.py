@@ -11,20 +11,20 @@ app_name = JustshopConfig.name
 
 class Category(models.Model):
 	"""Category class for marking products"""
-	category_name = models.CharField(max_length = 127, verbose_name = _('Имя категории'))
-	category_slug = models.SlugField(max_length = 127, allow_unicode = True , verbose_name = _('Краткое имя'))
-	
+	name = models.CharField(max_length = 127, verbose_name = _('Имя категории'))
+	slug = models.SlugField(max_length = 127, allow_unicode = True , verbose_name = _('Краткое имя'))
+
 	def __unicode__(self):
-		return self.category_name
+		return self.name
 	def __str__(self):
 		return self.__unicode__()
 	def get_absolute_url(self):
 		return reverse('%s:ProductListByCategory' % app_name,
-					   kwargs = {'category':self.category_slug}
+					   kwargs = {'category':self.slug}
 					   )
 	class Meta:
-		ordering = ['category_name']
-		verbose_name_plural = 'categories'
+		ordering = ['name']
+		verbose_name_plural = _('categories')
 
 class Product(models.Model):
 	"""Product itself"""
@@ -46,7 +46,7 @@ class Product(models.Model):
 	available = models.BooleanField(default = True, verbose_name = _('Доступен'))
 	created = models.DateTimeField(auto_now_add = True)
 	updated = models.DateTimeField(auto_now = True)
-	
+
 	def __unicode__(self):
 		return self.slug
 	def __str__(self):

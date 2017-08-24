@@ -10,12 +10,12 @@ class ProductList(ListView):
 	model = Product
 	template_name = 'JustShop/products_list.django.html'
 	context_object_name = 'products'
-	
+
 	def get_context_data(self, **kwargs):
 		context = super(ProductList, self).get_context_data(**kwargs)
 		category_slug = self.kwargs.get('category')
 		if category_slug:
-			category = get_object_or_404(Category, category_slug = category_slug)
+			category = get_object_or_404(Category, slug = category_slug)
 			context[self.context_object_name] = \
 				context[self.context_object_name].filter(category=category)
 			context['current_category'] = category
